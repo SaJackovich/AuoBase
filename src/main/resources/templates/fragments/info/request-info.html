@@ -1,0 +1,82 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="request-info">
+
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Add request</h2>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">From</label>
+                                <input class="input--style-4" type="text" name="from"
+                                       th:placeholder="1"/>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">To</label>
+                                <input class="input--style-4" type="text" name="to"
+                                       th:placeholder="2"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Username</label>
+                                <input class="input--style-4" type="text" name="username"
+                                       th:placeholder="3"/>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Position</label>
+                                <div class="p-t-10">
+                                    <label class="radio-container m-r-45">Driver
+                                        <input type="radio"
+                                               name="position" onclick="return false;"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-container">Dispatcher
+                                        <input type="radio"
+                                               name="position" onclick="return false;"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-container">Admin
+                                        <input type="radio"
+                                               name="position" onclick="return false;"/>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <label class="label">Email</label>
+                                <input class="input--style-4" type="email" name="email"
+                                       th:placeholder="6"/>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="/user/delete" th:method="post">
+                        <input type="hidden" th:name="_method" th:value="PUT"/>
+                        <input type="hidden" name="id" th:value="8"/>
+                        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Delete</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>

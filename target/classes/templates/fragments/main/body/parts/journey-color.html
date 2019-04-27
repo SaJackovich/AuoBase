@@ -1,0 +1,108 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="opened-journey">
+    <div class="article thumbnail" style="background-color: #A8FE8B">
+        <div th:replace="fragments/main/body/parts/journey-color :: ${kind}"></div>
+    </div>
+</div>
+
+<div th:fragment="closed-journey">
+    <div class="article thumbnail" style="background-color: #B8FFF9">
+        <div th:replace="fragments/main/body/parts/journey-color :: ${kind}"></div>
+    </div>
+</div>
+
+<div th:fragment="process-journey">
+    <div class="article thumbnail" style="background-color: #FBF48D">
+        <div th:replace="fragments/main/body/parts/journey-color :: ${kind}"></div>
+    </div>
+</div>
+
+<div th:fragment="canceled-journey">
+    <div class="article thumbnail" style="background-color: #FE8B8B">
+        <div th:replace="fragments/main/body/parts/journey-color :: ${kind}"></div>
+    </div>
+</div>
+
+<div th:fragment="main-page-journey">
+    <div class="data" >
+        <h3><a th:href="@{'/journey/info/' + ${journey.id}}" th:text="${journey.from} + '-' + ${journey.to}"></a></h3>
+        <ul class="vertical large-horizontal menu">
+
+            <div th:text="'Journey Status: ' + ${journey.status }"></div>
+            <li>
+                <i class="fi-eye"></i>
+                <label th:text="'Created: ' + ${#dates.format(journey.created, 'dd-MM-yyyy HH:mm:ss')}"></label>
+            </li>
+        </ul>
+        <hr/>
+    </div>
+</div>
+
+<div th:fragment="article-journey">
+
+    <h3 th:text="${journey.from} + '-' + ${journey.to}"></h3>
+    <ul class="vertical large-horizontal menu">
+
+        <li th:if="${journey.start}"><label th:text="'Started: ' + ${#dates.format(journey.start, 'dd-MM-yyyy HH:mm:ss')}"></label></li>
+        <li th:if="${journey.end}"><label th:text="'Ended: ' + ${#dates.format(journey.end, 'dd-MM-yyyy HH:mm:ss')}"></label></li>
+        <li><label th:text="'Journey status: ' + ${journey.status}"></label></li><br></br>
+        <li><label th:text="'From: ' + ${journey.from}"></label></li><br></br>
+        <li><label th:text="'To: ' + ${journey.to}"></label></li><br></br>
+        <div th:if="${journey.user != null}">
+            <li><label th:text="'Driver: ' + ${journey.user.firstName} + ' ' + ${journey.user.lastName}"></label></li><br></br>
+        </div>
+        <div th:if="${journey.auto != null}">
+            <li><label th:text="'Auto characters:'"></label></li>
+            <li th:text="'Model: ' + ${journey.auto.model}"></li>
+            <li th:text="'Height: ' + ${journey.auto.height}"></li>
+            <li th:text="'Width: ' + ${journey.auto.width}"></li>
+            <li th:text="'Carrying: ' + ${journey.auto.carrying}"></li>
+        </div>
+    </ul>
+    <hr/>
+
+    <div th:switch="${journey.status}">
+        <p th:case="${T(com.project.db.constant.JourneyStatus).OPENED}">
+            <div th:if="${#lists.contains(user.roles, T(com.project.db.constant.UserRole).DRIVER)}">
+                <form th:action="@{'/journey/edit/' + ${journey.id} + '/' + ${user.id}}" th:method="put">
+                    <div class="input-group-button" style="text-align: center">
+                        <input type="hidden" name="status" value="process"/>
+                        <input class="button" value="Start journey" type="submit"/>
+                    </div>
+                </form>
+            </div>
+        </p>
+        <p th:case="${T(com.project.db.constant.JourneyStatus).PROCESS}">
+            <div th:if="${journey.user.id} == ${user.id}">
+                <form th:action="@{'/journey/edit/' + ${journey.id} + '/' + ${user.id}}" th:method="put">
+                    <div class="input-group-button" style="text-align: left">
+                        <input type="hidden" name="status" value="closed"/>
+                        <input type="hidden" name="condition" value="true"/>
+                        <input class="button" style="background-color: #22bb5b" value="End journey with perfect auto" type="submit"/>
+                    </div>
+                    <div class="input-group-button" style="text-align: right">
+                        <input type="hidden" name="status" value="closed"/>
+                        <input type="hidden" name="condition" value="false"/>
+                        <input class="button" style="background-color: #bd4147;text-align: left" value="End journey with defective auto" type="submit"/>
+                    </div>
+                </form>
+            </div>
+        </p>
+    </div>
+
+    <div th:if="${journey.status} != ${T(com.project.db.constant.JourneyStatus).CANCELED}
+                    and !${#lists.contains(user.roles, T(com.project.db.constant.UserRole).DRIVER)}">
+        <form th:action="@{'/journey/edit/' + ${journey.id} + '/' + ${user.id}}" th:method="put">
+            <div class="input-group-button" style="text-align: center">
+                <input type="hidden" name="status" value="canceled"/>
+                <input class="button" style="background-color: #bd4147" value="Cancel journey" type="submit"/>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+</html>
+

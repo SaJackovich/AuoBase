@@ -1,0 +1,31 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="requests">
+
+  <div id="mainContent" class="large-10 columns" style="min-height: 600px;">
+
+    <div th:each="request : ${page.getContent()}">
+
+      <div class="article thumbnail" style="background-color: #A8FE8B">
+
+        <div class="data" th:style="!${request.processed} ? 'background-color: #feb436' : ''">
+          <h3><a th:href="@{'/request/info/' + ${request.id}}"
+                th:text="${request.from} + ' - ' + ${request.to}"></a></h3>
+          <ul class="vertical large-horizontal menu">
+            <li>
+              <label th:text="'Created: ' + ${#dates.format(request.created, 'dd-MM-yyyy HH:mm:ss')}"></label>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div th:replace="fragments/main/pagination :: pagination"></div>
+
+  </div>
+    
+</div>
+
+</html>

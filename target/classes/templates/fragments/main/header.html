@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<header th:fragment="header">
+    <style>
+	li {
+		list-style-type: none;
+		display: inline;
+	}
+	ul {
+		margin-left: 0;
+		padding: 4px;
+	}
+    </style>
+    <div class="callout primary" style="margin: 0;">
+        <div class="row">
+            <div class="large-6 medium-6 columns">
+                <h1 th:text="${user.firstName} + ' ' + ${user.lastName}"></h1>
+
+                <div th:if="${#lists.contains(user.roles, T(com.project.db.constant.UserRole).DRIVER)}">
+                    <form style="display: inline;" th:action="@{/request/add}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Apply for journey" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/journey/driverJourneys}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Label my journeys" type="submit" name="driverJourneys"/>
+                    </form>
+
+                    <div th:if="${rejectionsProcessed == true}">
+                        <form style="display: inline;" th:action="@{/rejections}" method="get">
+                            <input class="button" style="background-color: #0b2340" value="My rejections" type="submit" name="rejections"/>
+                        </form>
+                    </div>
+
+                    <div th:unless="${rejectionsProcessed == true}">
+                        <form th:action="@{/rejections}" method="get">
+                            <input class="button" style="background-color: #feb436" value="Label my rejections" type="submit" name="rejections"/>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div th:if="${#lists.contains(user.roles, T(com.project.db.constant.UserRole).DISPATCHER)}">
+                    <form th:action="@{requests}" method="get">
+                         <input class="button" style="background-color: #0b2340" value="Requests from drivers" type="submit" name="driverJourneys"/>
+                    </form>
+                </div>
+
+                <div th:if="${#lists.contains(user.roles, T(com.project.db.constant.UserRole).ADMIN)}">
+                    <form style="display: inline;" th:action="@{/request/add}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Create request" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/request}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Create journey" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/user/add}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Add user" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/user/delete}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Delete user" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/auto/add}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Add auto" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/auto}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Delete auto" type="submit"/>
+                    </form>
+                </div>
+            </div>
+            <div class="large-6 medium-6 columns">
+                <div th:switch="${template}">
+                    <p th:case="'journeys'">
+                    <form th:action="@{/journey}" method="get">
+                        <div class="input-group" style="margin-top: 1em;">
+                            <input id="search" class="input-group-field" name="searchQuery"
+                                   type="text" th:value="${param.searchQuery != null} ? ${param.searchQuery[0]} : ''" title=""/>
+                            <input th:if="${param.status != null}" type="hidden" name="status" th:value="${param.status[0]}"/>
+                            <input th:if="${param.sort != null}" type="hidden" name="sort" th:value="${param.sort[0]}"/>
+                            <div class="input-group-button">
+                                <input class="button" value="Find" type="submit" title=""/>
+                            </div>
+                        </div>
+                    </form>
+                    </p>
+                    <p th:case="'autoList'">
+                    <form th:action="@{${T(com.project.web.controller.util.EditorUriQuery).getCurrentUri()}}" method="get">
+                        <div class="input-group" style="margin-top: 1em;">
+                            <input id="search1" class="input-group-field" name="modelSearch"
+                                   type="text" th:value="${param.modelSearch != null} ? ${param.modelSearch[0]} : ''" title=""/>
+                            <input th:if="${param.sort != null}" type="hidden" name="sort" th:value="${param.sort[0]}"/>
+                            <div class="input-group-button">
+                                <input class="button" value="Find" type="submit" title=""/>
+                            </div>
+                        </div>
+                    </form>
+                    </p>
+                    <p th:case="'requests'">
+                    <form th:action="@{${T(com.project.web.controller.util.EditorUriQuery).getCurrentUri()}}" method="get">
+                        <div class="input-group" style="margin-top: 1em;">
+                            <input id="search2" class="input-group-field" name="searchQuery"
+                                   type="text" th:value="${param.searchQuery != null} ? ${param.searchQuery[0]} : ''" title=""/>
+                            <input th:if="${param.sort != null}" type="hidden" name="sort" th:value="${param.sort[0]}"/>
+                            <div class="input-group-button">
+                                <input class="button" value="Find" type="submit" title=""/>
+                            </div>
+                        </div>
+                    </form>
+                    </p>
+                    <p th:case="rejection">
+                    <form th:action="@{/search/rejection}" method="get">
+                        <div class="input-group" style="margin-top: 1em;">
+                            <input id="search3" class="input-group-field" name="query" type="text" value="${searchQuery}" title=""/>
+                            <div class="input-group-button">
+                                <input class="button" value="Find" type="submit" title=""/>
+                            </div>
+                        </div>
+                    </form>
+                    </p>
+                </div>
+
+                <ul style="text-align: right">
+                    <li>
+                        <a href="?sessionLocale=en">
+                            <img th:src="@{/media/flags/akrotiri_l.png}" alt=""/></a>
+                    </li>
+                    <li>
+                        <a href="?sessionLocale=de">
+                            <img th:src="@{/media/flags/germany_l.png}" alt=""/></a>
+                    </li>
+                    <li>
+                        <a href="?sessionLocale=fr">
+                            <img th:src="@{/media/flags/france_l.png}" alt=""/></a>
+                    </li>
+                    <li>
+                        <a href="?sessionLocale=ru">
+                            <img th:src="@{/media/flags/1200px-Flag_of_Russia.svg.png}" alt=""/></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+</html>

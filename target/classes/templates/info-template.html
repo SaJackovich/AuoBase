@@ -1,0 +1,17 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/info/head :: head"></head>
+
+<body>
+
+    <div th:replace="@{'fragments/info/' + ${template}} :: ${template}"></div>
+
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/select2/select2.min.js}"></script>
+<script th:src="@{/vendor/datepicker/moment.min.js}"></script>
+<script th:src="@{/vendor/datepicker/daterangepicker.js}"></script>
+<script th:src="@{/js/global.js}"></script>
+
+</body>
+</html>

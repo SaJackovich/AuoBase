@@ -1,0 +1,49 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="breadcrumbs">
+
+    <div class="row">
+        <nav role="navigation" class="large-12 small-6 medium-8 columns">
+
+            <ul class="breadcrumbs">
+                <div th:switch="${breadcrumbs}">
+                    <div th:case="'isUsers'">
+                        <li><a th:text="Journey" href="${/journey}"></a></li>
+                        <li th:text="All + ' ' + Users"></li>
+                    </div>
+                    <div th:case="'requestArticle'">
+                        <li><a th:text="Journey" href="${/journey}"></a></li>
+                        <li><a th:text="All + ' ' + requests" href="${/requests}"></a></li>
+                        <li th:text="Request"></li>
+                    </div>
+                    <div th:case="'rejection'">
+                        <li><a th:text="Journey" href="${/journey}"></a></li>
+                        <li th:text="Rejections"></li>
+                    </div>
+                    <div th:case="'requests'">
+                        <li><a th:text="Journey" href="${/journey}"></a></li>
+                        <li th:text="Request"></li>
+                    </div>
+                    <div th:case="'article'">
+                        <li><a th:text="Journey" href="${/journey}"></a></li>
+                    </div>
+                    <div th:case="'driverJourneys'">
+                        <li><a th:text="Journey" href="${/journey}"></a></li>
+                        <li th:text="My Journeys"></li>
+                    </div>
+                    <div th:case="'selectedCategory'">
+                        <li><a th:text="Journey" href="${/journey}"></a></li>
+                        <li th:text="Sorting"></li>
+                    </div>
+                    <div th:case="*">
+                        <li th:text="Journey"></li>
+                    </div>
+                </div>
+            </ul>
+        </nav>
+    </div>
+
+</div>
+
+</html>

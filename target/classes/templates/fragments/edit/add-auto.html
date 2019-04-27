@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="add-auto">
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form" th:action="@{/auto/add}" method="post" name="carForm" enctype="multipart/form-data">
+
+                <h3><span class="contact3-form-title">Add auto</span></h3><br></br>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" value="defective" class="custom-control-input" id="defective" name="condition" checked=""/>
+                    <label class="custom-control-label" for="defective">Defective</label>
+                </div>
+
+                <!-- Default inline 2-->
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" value="perfect" class="custom-control-input" id="perfect" name="condition"/>
+                    <label class="custom-control-label" for="perfect">Perfect</label>
+                </div>
+
+                <input type="text" name="model" placeholder="Model"/>
+                <input type="number" step="0.1" name="width" placeholder="Width"/>
+                <input type="number" step="0.1" name="height" placeholder="Height"/>
+                <input type="number" name="carrying" placeholder="carrying"/>
+
+                <input type="file" name="logo" value="Logo"/>
+
+                <button>Create</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</html>

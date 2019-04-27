@@ -1,0 +1,32 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Login Form</title>
+    <meta charset="UTF-8"/>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/css/login.css}"/>
+    <script  th:src="@{/js/login.js}"></script>
+</head>
+
+<body>
+
+<div class="login-page">
+    <div class="form">
+        <form class="login-form" th:action="@{/registration}" method="post">
+            <input type="text" name="username" placeholder="Username"/>
+            <input type="text" name="firstName" placeholder="First name"/>
+            <input type="text" name="lastName" placeholder="Last name"/>
+            <input type="password" name="password" placeholder="password"/>
+            <input type="password" name="verifiedPassword" placeholder="Verified password"/>
+            <input type="text" name="email" placeholder="email address"/>
+            <button>Create</button>
+            <p class="message">Already registered? <a href="#">Sign In</a></p>
+        </form>
+    </div>
+</div>
+
+</body>
+
+</html>
+

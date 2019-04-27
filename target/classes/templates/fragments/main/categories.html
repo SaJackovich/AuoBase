@@ -1,0 +1,186 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="categories">
+
+    <div class="columns large-2 show-for-large right" data-sticky-container="">
+        <div class="sticky categories show-for-large" data-sticky="" data-anchor="mainContent">
+
+            <div th:switch="${template}">
+                <p th:case="'journeys'">
+                    <div th:replace="fragments/main/categories :: journey-categories"></div>
+                </p>
+                <p th:case="'requests'">
+                    <div th:replace="fragments/main/categories :: request-categories"></div>
+                </p>
+                <p th:case="'autoList'">
+                    <div th:replace="fragments/main/categories :: auto-categories"></div>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div th:fragment="request-categories">
+    <table>
+        <tbody>
+        <tr>
+            <th th:text="Sort + ' ' + by + ' ' + date" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'created,asc'} ? 'selected item' : 'item'">
+                <a th:text="Ascending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'created,asc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'created,desc'} ? 'selected item' : 'item'">
+                <a th:text="Descending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'created,desc')}}">
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:fragment="journey-categories">
+    <table>
+        <tbody>
+        <tr>
+            <th th:text="Sort + ' ' + by + ' ' + number" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'id,asc'} ? 'selected item' : 'item'">
+                <a th:text="Ascending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'id,asc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'id,desc'} ? 'selected item' : 'item'">
+                <a th:text="Descending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'id,desc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th th:text="Sort + ' ' + by + ' ' + date" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'created,asc'} ? 'selected item' : 'item'">
+                <a th:text="Ascending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'created,asc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'created,desc'} ? 'selected item' : 'item'">
+                <a th:text="Descending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'created,desc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th th:text="Selection + ' ' + by + ' ' + status" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td th:class="${param.status != null and param.status[0] == 'opened'} ? 'selected item' : 'item'">
+                <a th:text="Opened"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('status', 'opened')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.status != null and param.status[0] == 'process'} ? 'selected item' : 'item'">
+                <a th:text="'In process'"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('status', 'process')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.status != null and param.status[0] == 'closed'} ? 'selected item' : 'item'">
+                <a th:text="Closed"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('status', 'closed')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.status != null and param.status[0] == 'canceled'} ? 'selected item' : 'item'">
+                <a th:text="Canceled"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('status', 'canceled')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th th:text="'Clear all filters'" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td class="item">
+                <a th:text="Clear" th:href="@{/journey}"></a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:fragment="auto-categories">
+    <table>
+        <tbody>
+        <tr>
+            <th th:text="Sort + ' ' + by + ' ' + height" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'height,asc'}? 'selected item' : 'item'">
+                <a th:text="Ascending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'height,asc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'height,desc'}? 'selected item' : 'item'">
+                <a th:text="Descending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'height,desc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th th:text="Sort + ' ' + by + ' ' + width" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'width,asc'}? 'selected item' : 'item'">
+                <a th:text="Ascending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'width,asc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'width,desc'}? 'selected item' : 'item'">
+                <a th:text="Descending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'width,desc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <th th:text="Sort + ' ' + by + ' ' + carrying" style="width: 270px;"></th>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'carrying,asc'}? 'selected item' : 'item'">
+                <a th:text="Ascending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'carrying,asc')}}">
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td th:class="${param.sort != null and param.sort[0] == 'carrying,desc'}? 'selected item' : 'item'">
+                <a th:text="Descending"
+                   th:href="@{${T(com.project.web.controller.util.EditorUriQuery).getUriWithParam('sort', 'carrying,desc')}}">
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</html>

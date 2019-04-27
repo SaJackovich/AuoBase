@@ -1,0 +1,17 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<div th:fragment="add-user">
+    <div class="login-page">
+        <div class="form">
+            <form class="login-form" th:action="@{/user/delete}" method="post">
+                <!-- Default inline 1-->
+                <h3><span class="contact3-form-title">Delete User</span></h3><br></br>
+                    <input type="text" name="emailOrUsername" placeholder="Username or Email"/>
+                <button>Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</html>
