@@ -1,6 +1,5 @@
 package com.project.web.controller;
 
-import com.project.core.service.AutoService;
 import com.project.core.service.JourneyService;
 import com.project.core.service.UserService;
 import com.project.db.constant.JourneyStatus;
@@ -14,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -50,6 +50,18 @@ public class JourneyController {
         return ControllerConstant.MAIN_TEMPLATE;
     }
 
+    @PreAuthorize("hasAuthority('DRIVER')")
+    @GetMapping("/my")
+    public String privateJourney(Model model,
+                                 @Valid JourneySearchDto parameterDto,
+                                 @PageableDefault(sort = {ControllerConstant.JOURNEY_CREATED}, direction = Sort.Direction.ASC) Pageable pageable) {
+        model.addAttribute(ControllerConstant.PAGE, journeyService.getBySearchParamsAndDriver(parameterDto,
+                userService.getCurrentUser(), pageable));
+        model.addAttribute(ControllerConstant.USER, userService.getCurrentUser());
+        model.addAttribute(ControllerConstant.TEMPLATE, ControllerConstant.JOURNEY_LIST);
+        return ControllerConstant.MAIN_TEMPLATE;
+    }
+
     @GetMapping("/info/{journey}")
     public String journeyInfo(@PathVariable(ControllerConstant.JOURNEY) Journey journey, Model model) {
         model.addAttribute(ControllerConstant.USER, userService.getCurrentUser());
@@ -58,6 +70,7 @@ public class JourneyController {
         return ControllerConstant.MAIN_TEMPLATE;
     }
 
+    @PreAuthorize("hasAuthority('DISPATCHER') or hasAuthority('ADMIN')")
     @PostMapping("/{request}/{auto}")
     public String addJourney(@PathVariable(ControllerConstant.REQUEST) Request request,
                              @PathVariable(ControllerConstant.AUTO) Auto auto,
@@ -76,7 +89,6 @@ public class JourneyController {
                                       @RequestParam(ControllerConstant.STATUS) JourneyStatus status,
                                       @RequestParam(value = ControllerConstant.CONDITION, required = false) Boolean autoCondition) {
         journeyService.changeJourneyStatus(journey, user, status, autoCondition);
-
         return ControllerConstant.REDIRECT + ControllerConstant.JOURNEY_INFO_URL + journey.getId();
     }
 }

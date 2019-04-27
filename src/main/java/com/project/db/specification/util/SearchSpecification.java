@@ -14,6 +14,13 @@ public final class SearchSpecification {
     private SearchSpecification() {
     }
 
+    public static Predicate byLongField(Long search, CriteriaBuilder builder, Expression<Long> path) {
+        if (search == 0) {
+            return builder.conjunction();
+        }
+        return builder.equal(path, search);
+    }
+
     public static Predicate byBooleanField(Boolean search, CriteriaBuilder builder, Expression<Boolean> path) {
         return search ? builder.isTrue(path) : builder.isFalse(path);
     }

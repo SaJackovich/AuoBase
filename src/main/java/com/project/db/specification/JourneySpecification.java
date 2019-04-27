@@ -1,6 +1,7 @@
 package com.project.db.specification;
 
 import com.project.db.entity.Journey;
+import com.project.db.entity.User;
 import com.project.db.specification.constant.FieldName;
 import com.project.db.specification.util.SearchSpecification;
 import com.project.web.dto.JourneySearchDto;
@@ -17,6 +18,7 @@ import java.util.Optional;
 public class JourneySpecification {
 
 
+
     public Specification<Journey> findByCondition(JourneySearchDto dto) {
         return (root, query, builder) -> builder.and(getPredicateBySearchParams(dto, root, query, builder)
                                                         .orElse(builder.conjunction()));
@@ -25,7 +27,7 @@ public class JourneySpecification {
     private Optional<Predicate> getPredicateBySearchParams(JourneySearchDto dto, Root<Journey> root,
                                                            CriteriaQuery query, CriteriaBuilder builder) {
         return Optional
-                .of(dto).
+                .of(dto)
                 .map(this::findFittingJourneyBySearchParams)
                 .map(journeySpecification -> journeySpecification.toPredicate(root, query, builder));
     }
@@ -42,4 +44,25 @@ public class JourneySpecification {
                                                                 root.get(FieldName.FROM)))));
     }
 
+    public Specification<Journey> findByConditionAndDriver(JourneySearchDto searchDto, User user) {
+        return (root, query, builder) -> builder.and(builder.and(getPredicateByDriver(root, user, query,builder)
+                                                            .orElse(builder.conjunction())),
+                                                    builder.and(getPredicateBySearchParams(searchDto, root, query, builder)
+                                                            .orElse(builder.conjunction())));
+    }
+
+    private Optional<Predicate> getPredicateByDriver(Root<Journey> root, User driver,
+                                                     CriteriaQuery query, CriteriaBuilder builder) {
+        return Optional
+                .of(driver)
+                .map(this::findFittingJourneyByDriver)
+                .map(journeySpecification -> journeySpecification.toPredicate(root, query, builder));
+    }
+
+    private Specification<Journey> findFittingJourneyByDriver(User driver) {
+        return (root, query, cb) -> cb.and(cb.and(SearchSpecification
+                                                .byLongField(driver.getId(),
+                                                            cb,
+                                                            root.get(FieldName.USER_ID))));
+    }
 }

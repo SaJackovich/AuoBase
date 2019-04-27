@@ -83,6 +83,11 @@ public class JourneyServiceImpl implements JourneyService {
         journeyRepository.save(journey);
     }
 
+    @Override
+    public Page<Journey> getBySearchParamsAndDriver(JourneySearchDto searchDto, User user, Pageable pageable) {
+        return journeyRepository.findAll(journeySpecification.findByConditionAndDriver(searchDto, user), pageable);
+    }
+
     @FunctionalInterface
     public interface JourneyStatusChanger {
 

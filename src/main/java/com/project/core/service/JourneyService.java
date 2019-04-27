@@ -22,4 +22,6 @@ public interface JourneyService {
     Journey add(Request request, Auto auto);
 
     void changeJourneyStatus(Journey journey, User user, JourneyStatus status, Boolean autoCondition);
+
+    Page<Journey> getBySearchParamsAndDriver(JourneySearchDto parameterDto, User user, Pageable pageable);
 }

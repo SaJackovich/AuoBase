@@ -13,6 +13,7 @@ import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,6 +43,7 @@ public class RequestController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasAuthority('DISPATCHER') or hasAuthority('ADMIN')")
     @GetMapping
     public String getAll(Model model,
                          @RequestParam(required = false) String searchQuery,
@@ -53,6 +55,7 @@ public class RequestController {
         return ControllerConstant.MAIN_TEMPLATE;
     }
 
+    @PreAuthorize("hasAuthority('DISPATCHER') or hasAuthority('ADMIN')")
     @GetMapping("/info/{request}")
     public String info(Model model,
                        @PathVariable(ControllerConstant.REQUEST) Request request) {
@@ -64,6 +67,7 @@ public class RequestController {
         return ControllerConstant.MAIN_TEMPLATE;
     }
 
+    @PreAuthorize("hasAuthority('DISPATCHER') or hasAuthority('ADMIN')")
     @GetMapping("/info/{request}/{auto}")
     public String openRequestWithAuto(Model model,
                                       @PathVariable(ControllerConstant.REQUEST) Request request,
@@ -77,6 +81,7 @@ public class RequestController {
         return ControllerConstant.MAIN_TEMPLATE;
     }
 
+    @PreAuthorize("hasAuthority('DISPATCHER') or hasAuthority('ADMIN')")
     @GetMapping("/{request}/auto")
     public String getFittingAutoForJourney(Model model,
                                            @PathVariable Request request,

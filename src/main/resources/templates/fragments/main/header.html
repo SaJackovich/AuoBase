@@ -20,27 +20,23 @@
                     <form style="display: inline;" th:action="@{/request/add}" method="get">
                         <input class="button" style="background-color: #0b2340" value="Apply for journey" type="submit"/>
                     </form>
-                    <form style="display: inline;" th:action="@{/journey/driverJourneys}" method="get">
-                        <input class="button" style="background-color: #0b2340" value="Label my journeys" type="submit" name="driverJourneys"/>
+                    <form style="display: inline;" th:action="@{/journey/my}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="My journeys" type="submit"/>
                     </form>
-
-                    <div th:if="${rejectionsProcessed == true}">
-                        <form style="display: inline;" th:action="@{/rejections}" method="get">
-                            <input class="button" style="background-color: #0b2340" value="My rejections" type="submit" name="rejections"/>
-                        </form>
-                    </div>
-
-                    <div th:unless="${rejectionsProcessed == true}">
-                        <form th:action="@{/rejections}" method="get">
-                            <input class="button" style="background-color: #feb436" value="Label my rejections" type="submit" name="rejections"/>
-                        </form>
-                    </div>
-
                 </div>
 
                 <div th:if="${#lists.contains(user.roles, T(com.project.db.constant.UserRole).DISPATCHER)}">
-                    <form th:action="@{requests}" method="get">
-                         <input class="button" style="background-color: #0b2340" value="Requests from drivers" type="submit" name="driverJourneys"/>
+                    <form style="display: inline;" th:action="@{/request/add}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Create request" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/request}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Create journey" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/auto/add}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Add auto" type="submit"/>
+                    </form>
+                    <form style="display: inline;" th:action="@{/auto}" method="get">
+                        <input class="button" style="background-color: #0b2340" value="Delete auto" type="submit"/>
                     </form>
                 </div>
 

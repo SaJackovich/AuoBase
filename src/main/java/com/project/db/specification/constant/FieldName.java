@@ -21,4 +21,6 @@ public final class FieldName {
 
     public static final String TO = "to";
 
+    public static final String USER_ID = "user";
+
 }
