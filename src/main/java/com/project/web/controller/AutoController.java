@@ -37,7 +37,12 @@ public class AutoController {
     private UserService userService;
 
     @Autowired
-    public AutoController(ConversionService converter, AutoService autoService, LogoService logoService, UserService userService) {
+    public AutoController(
+            ConversionService converter,
+            AutoService autoService,
+            LogoService logoService,
+            UserService userService) {
+
         this.converter = converter;
         this.autoService = autoService;
         this.logoService = logoService;
@@ -75,7 +80,7 @@ public class AutoController {
     }
 
     @GetMapping("/delete/{auto}")
-    public String openDeleteForm(Model model,
+    public String delete(Model model,
                                  @PathVariable(ControllerConstant.AUTO) Auto auto) {
         model.addAttribute(ControllerConstant.TEMPLATE, ControllerConstant.DELETE_AUTO);
         model.addAttribute(ControllerConstant.AUTO, auto);

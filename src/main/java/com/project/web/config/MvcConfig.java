@@ -87,7 +87,6 @@ public class MvcConfig implements WebMvcConfigurer {
 //        registry.addResourceHandler("/vendor/**")
 //                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\vendor\\");
 
-
         registry.addResourceHandler("/media/**")
                 .addResourceLocations("file:F:\\Spring Java\\AuoBase\\src\\main\\resources\\static\\media\\")
                 .setCachePeriod(0);
@@ -103,6 +102,8 @@ public class MvcConfig implements WebMvcConfigurer {
                 .addResourceLocations("file:F:\\Spring Java\\AuoBase\\src\\main\\resources\\static\\scss\\");
         registry.addResourceHandler("/vendor/**")
                 .addResourceLocations("file:F:\\Spring Java\\AuoBase\\src\\main\\resources\\static\\vendor\\");
+        registry.addResourceHandler("/img/**")
+                .addResourceLocations("file:F:\\Spring Java\\AuoBase\\src\\main\\resources\\static\\img\\");
     }
 
     @Override

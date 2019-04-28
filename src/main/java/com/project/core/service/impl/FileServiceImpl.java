@@ -2,6 +2,7 @@ package com.project.core.service.impl;
 
 import com.project.core.service.FileService;
 import com.project.core.service.UserService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,6 +17,8 @@ public class FileServiceImpl implements FileService {
     private static final String AUTO_LOGO_FOLDER = "auto\\";
     private static final String CANNOT_ADD_AUTO_LOGO = "Cannot add auto logo!";
 
+    private final Logger log = Logger.getLogger(this.getClass());
+
     @Autowired
     private UserService userService;
 
@@ -26,7 +29,7 @@ public class FileServiceImpl implements FileService {
                 DEFAULT_LOGO_FOLDER + AUTO_LOGO_FOLDER + userService.getCurrentUser().getUsername() + "." + extension)) {
             stream.write(file.getBytes());
         } catch (IOException e) {
-            System.err.println(CANNOT_ADD_AUTO_LOGO);
+            log.error(CANNOT_ADD_AUTO_LOGO);
         }
     }
 }

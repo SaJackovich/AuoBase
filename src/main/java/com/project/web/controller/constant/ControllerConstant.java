@@ -104,4 +104,21 @@ public final class ControllerConstant {
     public static final String USER_INFO_URL = "/user/info/";
 
     public static final String REQUEST_CREATED = "created";
+
+    public static final String CONTAINER = "container";
+
+    public static final String BAD_REQUEST = "Bad Request";
+
+    public static final String ERROR_PAGE = "error";
+
+    public static final String CONFLICT = "Conflict";
+
+    public static final String INVALID_INPUT = "Invalid Input";
+
+    public static final String ACCESS_DENIED = "Access Denied";
+
+    public static final String PRECONDITION_FAILED = "Precondition Failed";
+
+    public static final String PAGE_NOT_FOUND = "Page Not Found";
+
 }
