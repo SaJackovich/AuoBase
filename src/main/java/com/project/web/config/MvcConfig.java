@@ -70,23 +70,6 @@ public class MvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-//        registry.addResourceHandler("/media/**")
-//                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\media\\")
-//                .setCachePeriod(0);
-//        registry.addResourceHandler("/js/**")
-//                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\js\\");
-//        registry.addResourceHandler("/css/**")
-//                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\css\\");
-//        registry.addResourceHandler("/bootstrap/**")
-//                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\bootstrap\\");
-//        registry.addResourceHandler("/font/**")
-//                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\font\\");
-//        registry.addResourceHandler("/scss/**")
-//                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\scss\\");
-//        registry.addResourceHandler("/vendor/**")
-//                .addResourceLocations("file:D:\\WorkingSpringProjects\\WorkingOldprojectToString\\OldProjectToSpring\\src\\main\\resources\\static\\vendor\\");
-
         registry.addResourceHandler("/media/**")
                 .addResourceLocations("file:F:\\Spring Java\\AuoBase\\src\\main\\resources\\static\\media\\")
                 .setCachePeriod(0);
