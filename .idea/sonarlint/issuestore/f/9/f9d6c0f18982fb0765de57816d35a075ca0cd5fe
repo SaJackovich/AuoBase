@@ -1,8 +1,0 @@
-
-^squid:S4684S"@Replace this persistent entity with a simple POJO or DTO object.(Ë€¯Ş8É¹¦¥-
-Usquid:S1135Q"2Complete the task associated to this TODO comment.(­Ö¬õúÿÿÿÿ8¸·¥¥-
-gsquid:S11921"IDefine a constant instead of duplicating this literal "template" 3 times.(½éò³8ÀŞ ¥-
-csquid:S4684K"@Replace this persistent entity with a simple POJO or DTO object.(áÊŞûÿÿÿÿ8š”¥-
-gsquid:UselessImportCheck	"7Remove this unused import 'com.project.db.entity.User'.(Á«Çšÿÿÿÿÿ8Ÿã­¡¥-
-esquid:UselessImportCheck":Remove this unused import 'com.project.db.entity.Journey'.(ÊÚâÑ8Ÿã­¡¥-
-rsquid:UselessImportCheck"BRemove this unused import 'com.project.db.constant.JourneyStatus'.(§ïê¢üÿÿÿÿ8Ÿã­¡¥-
